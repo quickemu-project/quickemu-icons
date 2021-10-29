@@ -44,5 +44,5 @@ ${SVGO} "${FILES[@]}" -o "${OUTPUT_FILES[@]}"
 
 cd "$PROJECT_ROOT/build/"
 echo "Creating archive"
-tar cvzf quickemu-icons.tar.gz *
+tar cvzf quickemu-icons.tar.gz -- *
 echo "Done - quickemu-icons.tar.gz created in build/"
