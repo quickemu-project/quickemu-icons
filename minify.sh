@@ -14,9 +14,11 @@ if [ ! -e "${SVGEXPORT}" ]; then
 		exit 1
 fi
 
+PROJECT_ROOT=$(pwd)
+OUTPUT_DIR="$PROJECT_ROOT/build"
+
 FILES=""
 OUTPUT_FILES=""
-OUTPUT_DIR="./build"
 
 if [ ! -d "$OUTPUT_DIR" ]; then
 		mkdir $OUTPUT_DIR
@@ -32,16 +34,18 @@ if [ -d "$OUTPUT_DIR/png" ]; then
 fi
 mkdir $OUTPUT_DIR/png
 
-for i in *.svg; do
-		FILES="$FILES./$i "
-		OUTPUT_FILES="$OUTPUT_FILES./$OUTPUT_DIR/svg/$i "
-		TEMP_OUTPUT="./$OUTPUT_DIR/png/$i"
-		${SVGEXPORT} "./$i" ${TEMP_OUTPUT/.svg/.png} 512
+for i in $PROJECT_ROOT/src/*.svg; do
+		FILES="$FILES$i "
+		SVG_OUTPUT=${i/src/build\/svg}
+		OUTPUT_FILES="$OUTPUT_FILES$SVG_OUTPUT "
+		PNG_OUTPUT=${i/src/build\/png}
+		PNG_OUTPUT=${PNG_OUTPUT/.svg/.png}
+		${SVGEXPORT} "$i" $PNG_OUTPUT 512
 done
 
 ${SVGO} $FILES -o $OUTPUT_FILES
 
-cd build/
+cd $PROJECT_ROOT/build/
 echo "Creating archive"
 tar cvzf quickemu-icons.tar.gz *
 echo "Done - quickemu-icons.tar.gz created in build/"
