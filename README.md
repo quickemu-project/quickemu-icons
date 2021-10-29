@@ -2,6 +2,8 @@
 
 Quickemu VM icons for various operating systems for use in desktop files etc.
 
+Visit the <a href="https://github.com/Lukewh/quickemu-icons/releases">Releases page</a> to download optimized versions.
+
 <hr />
 
 ## VM Examples
@@ -38,7 +40,7 @@ Quickemu VM icons for various operating systems for use in desktop files etc.
 		<tr>
 			<th>Colour</th>
 			<th>With background</th>
-			<th>No background</th>
+			<th>Wthout background</th>
 		</tr>
 	</thead>
 	<tbody>
