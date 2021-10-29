@@ -13,6 +13,7 @@ Visit the <a href="https://github.com/Lukewh/quickemu-icons/releases">Releases p
 			<th>OS</th>
 			<th>PNG</th>
 			<th>SVG</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -48,16 +49,21 @@ Visit the <a href="https://github.com/Lukewh/quickemu-icons/releases">Releases p
 			<th>Pink</th>
 			<td><img src="src/quickemu-pink.svg" alt="Quickemu pink with background" /></td>
 			<td><img src="src/quickemu-pink-nobg.svg" alt="Quickemu pink without background" /></td>
+			<td></td>
 		</tr>
 		<tr>
 			<th>Black</th>
 			<td><img src="src/quickemu-black.svg" alt="Quickemu black with background" /></td>
 			<td><img src="src/quickemu-black-nobg.svg" alt="Quickemu black without background" /></td>
+			<td></td>
 		</tr>
 		<tr>
 			<th>White</th>
 			<td><img src="src/quickemu-white.svg" alt="Quickemu white with background" /></td>
 			<td><img src="src/quickemu-white-nobg.svg" alt="Quickemu white without background" /></td>
+			<td><img src="src/quickemu-white-pinkbg.svg" alt="Quickemu white with pink background" /></td>
+		</tr>
+		<tr>
 		</tr>
 	</tbody>
 </table>
