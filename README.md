@@ -1,10 +1,10 @@
 <h1><img src="quickemu.png" alt="quickemu" width="64" />Quickemu - Icons</h1>
 
-VM icons for various operating systems for use in desktop files etc.
+Quickemu VM icons for various operating systems for use in desktop files etc.
 
 <hr />
 
-## Examples
+## VM Examples
 <table>
 	<thead>
 		<tr>
@@ -30,4 +30,32 @@ VM icons for various operating systems for use in desktop files etc.
 			<td><img src="examples/windows.svg" alt="Window SVG" width="128"/></td>
 		</tr>
    	</tbody>
+</table>
+
+## Quickemu logos
+<table>
+	<thead>
+		<tr>
+			<td>Colour</td>
+			<td>With background</td>
+			<td>No background</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Pink</td>
+			<td><img src="src/quickemu-pink.svg" alt="Quickemu pink with background" /></td>
+			<td><img src="src/quickemu-pink-nobg.svg" alt="Quickemu pink without background" /></td>
+		</tr>
+		<tr>
+			<td>Black</td>
+			<td><img src="src/quickemu-black.svg" alt="Quickemu black with background" /></td>
+			<td><img src="src/quickemu-black-nobg.svg" alt="Quickemu black without background" /></td>
+		</tr>
+		<tr>
+			<td>White</td>
+			<td><img src="src/quickemu-white.svg" alt="Quickemu white with background" /></td>
+			<td><img src="src/quickemu-white-nobg.svg" alt="Quickemu white without background" /></td>
+		</tr>
+	</tbody>
 </table>
