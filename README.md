@@ -10,7 +10,7 @@ Quickemu VM icons for various operating systems for use in desktop files etc.
 		<tr>
 			<th>OS</th>
 			<th>PNG</th>
-			<th>SVG</tg>
+			<th>SVG</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -36,24 +36,24 @@ Quickemu VM icons for various operating systems for use in desktop files etc.
 <table>
 	<thead>
 		<tr>
-			<td>Colour</td>
-			<td>With background</td>
-			<td>No background</td>
+			<th>Colour</th>
+			<th>With background</th>
+			<th>No background</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>Pink</td>
+			<th>Pink</th>
 			<td><img src="src/quickemu-pink.svg" alt="Quickemu pink with background" /></td>
 			<td><img src="src/quickemu-pink-nobg.svg" alt="Quickemu pink without background" /></td>
 		</tr>
 		<tr>
-			<td>Black</td>
+			<th>Black</th>
 			<td><img src="src/quickemu-black.svg" alt="Quickemu black with background" /></td>
 			<td><img src="src/quickemu-black-nobg.svg" alt="Quickemu black without background" /></td>
 		</tr>
 		<tr>
-			<td>White</td>
+			<th>White</th>
 			<td><img src="src/quickemu-white.svg" alt="Quickemu white with background" /></td>
 			<td><img src="src/quickemu-white-nobg.svg" alt="Quickemu white without background" /></td>
 		</tr>
