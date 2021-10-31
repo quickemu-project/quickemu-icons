@@ -24,14 +24,16 @@ fi
 if [ -d "$OUTPUT_DIR/svg" ]; then
 		rm -r "$OUTPUT_DIR/svg"
 fi
-mkdir "$OUTPUT_DIR/svg"
+mkdir -p "$OUTPUT_DIR/svg/distro-logos"
+mkdir -p "$OUTPUT_DIR/svg/quickemu-logos"
 
 if [ -d "$OUTPUT_DIR/png" ]; then
 		rm -r "$OUTPUT_DIR/png"
 fi
-mkdir "$OUTPUT_DIR/png"
+mkdir -p "$OUTPUT_DIR/png/distro-logos"
+mkdir -p "$OUTPUT_DIR/png/quickemu-logos"
 
-for i in "$PROJECT_ROOT"/src/*.svg; do
+for i in "$PROJECT_ROOT"/src/**/*.svg; do
 		FILES+=("$i")
 		SVG_OUTPUT=${i/src/build\/svg}
 		OUTPUT_FILES+=("$SVG_OUTPUT")
