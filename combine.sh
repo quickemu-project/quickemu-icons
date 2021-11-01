@@ -7,6 +7,13 @@
 
 set -e
 
+SVGO=$(command -v svgo)
+if [ ! -e "${SVGO}" ]; then
+		echo "ERROR - SVGO not found. Install with npm."
+		echo "    npm install -g svgo"
+		exit 1
+fi
+
 if [[ $# -ne 3 ]]; then
     echo "ERROR! Please provide exactly 3 arguments (two input files and one output file)."
     exit 1
@@ -16,7 +23,7 @@ fi
 
 # Make sure all input files went through svgo for homogenous structure
 for file in "$1" "$2"; do
-    svgo --pretty --indent 0 --final-newline "$file"
+    ${SVGO} --pretty --indent 0 --final-newline "$file"
 done
 
 # Delete contents of output file, if it exists
