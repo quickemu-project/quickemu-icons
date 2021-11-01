@@ -17,20 +17,20 @@ fi
 PROJECT_ROOT=$(pwd)
 BUILD_DIR="$PROJECT_ROOT/build"
 
-#Start from a clean slate
+# Start from a clean slate
 rm -rf "$BUILD_DIR"
 
 for distro_icon in src/distro-icons/*.svg; do
-	# Create directories for every distro (e.g. 'build/fedora/png' and 'build/fedora/svg')
+	# Create directories for every distro (e.g. 'build/png/fedora' and 'build/svg/fedora')
 	DISTRO_NAME=$(basename -a -s .svg "$distro_icon")
-	PNG_DIR="$BUILD_DIR/$DISTRO_NAME/png"
-	SVG_DIR="$BUILD_DIR/$DISTRO_NAME/svg"
+	PNG_DIR="$BUILD_DIR/png/$DISTRO_NAME"
+	SVG_DIR="$BUILD_DIR/svg/$DISTRO_NAME"
 	mkdir -p "$PNG_DIR"
 	mkdir -p "$SVG_DIR"
 
 	for quickemu_icon in src/quickemu-icons/*.svg; do
 		# Combine the distro icon with every quickemu icon variant
-		# and save it under 'build/fedora/svg/DISTRO-QEMU_VARIANT.svg'
+		# and save it under 'build/svg/fedora/DISTRO-QEMU_VARIANT.svg'
 		SVG_OUTPUT_FILENAME="$DISTRO_NAME"-"$(basename "$quickemu_icon" | cut -d "-" -f2-)"
 		SVG_OUTPUT_PATH="$SVG_DIR/$SVG_OUTPUT_FILENAME"
 		./combine.sh "$distro_icon" "$quickemu_icon" "$SVG_OUTPUT_PATH"
