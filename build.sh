@@ -37,7 +37,7 @@ for distro_icon in src/distro-icons/*.svg; do
 		${SVGO} "$SVG_OUTPUT_PATH"
 
 		# Create PNG out of the combined image
-		PNG_OUTPUT_FILENAME="$DISTRO_NAME"-"$(basename "$quickemu_icon" | cut -d "-" -f2- | cut -d "." -f1).png"
+		PNG_OUTPUT_FILENAME="$DISTRO_NAME-$(basename "$quickemu_icon" | cut -d "-" -f2- | cut -d "." -f1).png"
 		PNG_OUTPUT_PATH="$PNG_DIR/$PNG_OUTPUT_FILENAME"
 		${SVGEXPORT} "$SVG_OUTPUT_PATH" "$PNG_OUTPUT_PATH" 512
 	done
