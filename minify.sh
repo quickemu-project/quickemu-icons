@@ -15,34 +15,33 @@ if [ ! -e "${SVGEXPORT}" ]; then
 fi
 
 PROJECT_ROOT=$(pwd)
-OUTPUT_DIR="$PROJECT_ROOT/build"
+BUILD_DIR="$PROJECT_ROOT/build"
 
-if [ ! -d "$OUTPUT_DIR" ]; then
-		mkdir "$OUTPUT_DIR"
-fi
+#Start from a clean slate
+rm -rf "$BUILD_DIR"
 
-if [ -d "$OUTPUT_DIR/svg" ]; then
-		rm -r "$OUTPUT_DIR/svg"
-fi
-mkdir -p "$OUTPUT_DIR/svg/distro-logos"
-mkdir -p "$OUTPUT_DIR/svg/quickemu-logos"
+for distro_icon in src/distro-icons/*.svg; do
+	# Create directories for every distro (e.g. 'build/fedora/png' and 'build/fedora/svg')
+	DISTRO_NAME=$(basename -a -s .svg "$distro_icon")
+	PNG_DIR="$BUILD_DIR/$DISTRO_NAME/png"
+	SVG_DIR="$BUILD_DIR/$DISTRO_NAME/svg"
+	mkdir -p "$PNG_DIR"
+	mkdir -p "$SVG_DIR"
 
-if [ -d "$OUTPUT_DIR/png" ]; then
-		rm -r "$OUTPUT_DIR/png"
-fi
-mkdir -p "$OUTPUT_DIR/png/distro-logos"
-mkdir -p "$OUTPUT_DIR/png/quickemu-logos"
+	for quickemu_icon in src/quickemu-icons/*.svg; do
+		# Combine the distro icon with every quickemu icon variant
+		# and save it under 'build/fedora/svg/DISTRO-QEMU_VARIANT.svg'
+		SVG_OUTPUT_FILENAME="$DISTRO_NAME"-"$(basename "$quickemu_icon" | cut -d "-" -f2-)"
+		SVG_OUTPUT_PATH="$SVG_DIR/$SVG_OUTPUT_FILENAME"
+		./combine.sh "$distro_icon" "$quickemu_icon" "$SVG_OUTPUT_PATH"
+		${SVGO} "$SVG_OUTPUT_PATH"
 
-for i in "$PROJECT_ROOT"/src/**/*.svg; do
-		FILES+=("$i")
-		SVG_OUTPUT=${i/src/build\/svg}
-		OUTPUT_FILES+=("$SVG_OUTPUT")
-		PNG_OUTPUT=${i/src/build\/png}
-		PNG_OUTPUT=${PNG_OUTPUT/.svg/.png}
-		${SVGEXPORT} "$i" "$PNG_OUTPUT" 512
+		# Create PNG out of the combined image
+		PNG_OUTPUT_FILENAME="$DISTRO_NAME"-"$(basename "$quickemu_icon" | cut -d "-" -f2- | cut -d "." -f1).png"
+		PNG_OUTPUT_PATH="$PNG_DIR/$PNG_OUTPUT_FILENAME"
+		${SVGEXPORT} "$SVG_OUTPUT_PATH" "$PNG_OUTPUT_PATH" 512
+	done
 done
-
-${SVGO} "${FILES[@]}" -o "${OUTPUT_FILES[@]}"
 
 cd "$PROJECT_ROOT/build/" || exit
 echo "Creating archive"
