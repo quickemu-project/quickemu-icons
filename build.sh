@@ -29,16 +29,18 @@ for distro_icon in src/distro-icons/*.svg; do
 	mkdir -p "$SVG_DIR"
 
 	for quickemu_icon in src/quickemu-icons/*.svg; do
+		FILE_NAME="$(basename "$quickemu_icon")"
 		# Combine the distro icon with every quickemu icon variant that has a background
 		# and save the output under 'build/svg/fedora/DISTRO-QEMU_VARIANT.svg'
-		if [[ ! "$(basename "$quickemu_icon")" =~ "nobg" ]]; then
-			SVG_OUTPUT_FILENAME="$DISTRO_NAME"-"$(basename "$quickemu_icon" | cut -d "-" -f2-)"
+		if [[ ! "$FILE_NAME" =~ "nobg-overlay" && "$FILE_NAME" =~ "overlay" ]]; then
+			SVG_OUTPUT_FILENAME="$DISTRO_NAME"-"${FILE_NAME/-overlay/}"
+			echo $SVG_OUTPUT_FILENAME
 			SVG_OUTPUT_PATH="$SVG_DIR/$SVG_OUTPUT_FILENAME"
 			./combine.sh "$distro_icon" "$quickemu_icon" "$SVG_OUTPUT_PATH"
 			${SVGO} "$SVG_OUTPUT_PATH"
 
 			# Create PNG out of the combined image
-			PNG_OUTPUT_FILENAME="$DISTRO_NAME-$(basename "$quickemu_icon" | cut -d "-" -f2- | cut -d "." -f1).png"
+			PNG_OUTPUT_FILENAME="${SVG_OUTPUT_FILENAME/\.svg/\.png}"
 			PNG_OUTPUT_PATH="$PNG_DIR/$PNG_OUTPUT_FILENAME"
 			${SVGEXPORT} "$SVG_OUTPUT_PATH" "$PNG_OUTPUT_PATH" 512
 		fi
@@ -50,13 +52,16 @@ done
 mkdir "$BUILD_DIR/png/quickemu"
 mkdir "$BUILD_DIR/svg/quickemu"
 for quickemu_icon in src/quickemu-icons/*.svg; do
-	SVG_OUTPUT_FILENAME="$(basename "$quickemu_icon")"
-	SVG_OUTPUT_PATH="$BUILD_DIR/svg/quickemu/$SVG_OUTPUT_FILENAME"
-	${SVGO} "$quickemu_icon" -o "$SVG_OUTPUT_PATH"
+	FILE_NAME="$(basename "$quickemu_icon")"
+	if [[ ! "$FILE_NAME" =~ "-overlay" ]]; then
+		SVG_OUTPUT_FILENAME="$(basename "$quickemu_icon")"
+		SVG_OUTPUT_PATH="$BUILD_DIR/svg/quickemu/$SVG_OUTPUT_FILENAME"
+		${SVGO} "$quickemu_icon" -o "$SVG_OUTPUT_PATH"
 
-	PNG_OUTPUT_FILENAME="$(basename -a -s .svg "$quickemu_icon").png"
-	PNG_OUTPUT_PATH="$BUILD_DIR/png/quickemu/$PNG_OUTPUT_FILENAME"
-	${SVGEXPORT} "$quickemu_icon" "$PNG_OUTPUT_PATH" 512
+		PNG_OUTPUT_FILENAME="$(basename -a -s .svg "$quickemu_icon").png"
+		PNG_OUTPUT_PATH="$BUILD_DIR/png/quickemu/$PNG_OUTPUT_FILENAME"
+		${SVGEXPORT} "$quickemu_icon" "$PNG_OUTPUT_PATH" 512
+	fi
 done
 
 
