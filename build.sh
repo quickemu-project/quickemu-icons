@@ -34,7 +34,6 @@ for distro_icon in src/distro-icons/*.svg; do
 		# and save the output under 'build/svg/fedora/DISTRO-QEMU_VARIANT.svg'
 		if [[ ! "$FILE_NAME" =~ "nobg-overlay" && "$FILE_NAME" =~ "overlay" ]]; then
 			SVG_OUTPUT_FILENAME="$DISTRO_NAME"-"${FILE_NAME/-overlay/}"
-			echo $SVG_OUTPUT_FILENAME
 			SVG_OUTPUT_PATH="$SVG_DIR/$SVG_OUTPUT_FILENAME"
 			./combine.sh "$distro_icon" "$quickemu_icon" "$SVG_OUTPUT_PATH"
 			${SVGO} "$SVG_OUTPUT_PATH"
