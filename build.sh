@@ -48,17 +48,15 @@ for distro_icon in src/distro-icons/*.svg; do
 done
 
 # Put raw quickemu icons in 'build'
-# TODO Make the exported icons bigger (512x512px instead of 155x155px)
 mkdir "$BUILD_DIR/png/quickemu"
 mkdir "$BUILD_DIR/svg/quickemu"
 for quickemu_icon in src/quickemu-icons/*.svg; do
 	FILE_NAME="$(basename "$quickemu_icon")"
 	if [[ ! "$FILE_NAME" =~ "-overlay" ]]; then
-		SVG_OUTPUT_FILENAME="$(basename "$quickemu_icon")"
-		SVG_OUTPUT_PATH="$BUILD_DIR/svg/quickemu/$SVG_OUTPUT_FILENAME"
+		SVG_OUTPUT_PATH="$BUILD_DIR/svg/quickemu/$FILE_NAME"
 		${SVGO} "$quickemu_icon" -o "$SVG_OUTPUT_PATH"
 
-		PNG_OUTPUT_FILENAME="$(basename -a -s .svg "$quickemu_icon").png"
+		PNG_OUTPUT_FILENAME="$(basename -a -s .svg "$FILE_NAME").png"
 		PNG_OUTPUT_PATH="$BUILD_DIR/png/quickemu/$PNG_OUTPUT_FILENAME"
 		${SVGEXPORT} "$quickemu_icon" "$PNG_OUTPUT_PATH" 512
 	fi
