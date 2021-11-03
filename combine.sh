@@ -19,11 +19,13 @@ if [[ $# -ne 3 ]]; then
     exit 1
 fi
 
-# TODO Check canvas sizes
-
-# Make sure all input files went through svgo for homogenous structure
 for file in "$1" "$2"; do
+    # Make sure all input files went through svgo for homogenous structure
     ${SVGO} --pretty --indent 0 --final-newline "$file"
+    if ! head -1 "$file" | grep -q "height=\"512\"" - || ! head -1 "$file" | grep -q "width=\"512\"" -; then
+        echo "ERROR! The canvas of '$file' is not 512x512 pixels in size."
+        exit 1
+    fi
 done
 
 # Delete contents of output file, if it exists
