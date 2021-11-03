@@ -41,7 +41,7 @@ Visit the <a href="https://github.com/Lukewh/quickemu-icons/releases">Releases p
 		<tr>
 			<th>Colour</th>
 			<th>With background</th>
-			<th>Wthout background</th>
+			<th>Without background</th>
 		</tr>
 	</thead>
 	<tbody>
