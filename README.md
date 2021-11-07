@@ -1,4 +1,8 @@
-<img src="quickemu.png" alt="quickemu" width="128" /><h1 style="line-height: 64px">Quickemu - Icons</h1>
+<h1 align="center" style="line-height: 64px">
+  <img src="quickemu.png" alt="quickemu" width="128" />
+  <br />
+  Quickemu - Icons
+</h1>
 
 Quickemu VM icons for various operating systems for use in desktop files etc.
 
