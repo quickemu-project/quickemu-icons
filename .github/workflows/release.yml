@@ -1,20 +1,20 @@
 name: Release to Pages
 on:
-	push:
+  push:
     branches:
       - '**'
-	pull_request:
+  pull_request:
     branches:
       - '**'
 jobs:
-	Build:
-		runs-on: ubuntu-20.04
-		steps:
-			- run: echo "Starting build"
-			- name: Checkout repository
-				uses: actions/checkout@v2
-			- name: Install dependences
-				run: |
-				  sudo apt update
-					sudo apt install nodejs
-					${{ github.workspace }}build.sh
+  Build:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "Starting build"
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install dependences
+        run: |
+          apt update
+          apt install nodejs
+          ${{ github.workspace }}build.sh
