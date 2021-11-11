@@ -18,4 +18,7 @@ jobs:
       - name: Install dependences
         run: |
           npm install -g svgo svgexport
-          ${{ github.workspace }}build.sh
+      - name: Build
+        run: |
+          cd ${{ github.workspace }}
+          ./build.sh
