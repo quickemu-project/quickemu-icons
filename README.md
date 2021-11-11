@@ -51,7 +51,8 @@ Check out his [Twitch channel](https://twitch.tv/wimpysworld) for coding streams
 			<th>Colour</th>
 			<th>With background</th>
 			<th>Without background</th>
-		</tr>
+			<th>Pink background</th>
+    </tr>
 	</thead>
 	<tbody>
 		<tr>
