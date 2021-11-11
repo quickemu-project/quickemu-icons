@@ -1,4 +1,4 @@
-name: Release to Pages
+name: Release and upload to Pages
 on:
   release:
     types:
@@ -19,6 +19,15 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           ./build.sh
+      - name: Add release
+        run: |
+          upload_url=$(curl -sL https://api.github.com/repos/actions/checkout/releases/latest | jq -r '.upload_url')
+          echo UPLOAD_URL=$upload_url >> $GITHUB_ENV
+        shell: bash
+      - uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ env.UPLOAD_URL }}
+          asset_path: ./build/quickemu-icons.tar.gz
       - name: Docs folder
         run: |
           cd ${{ github.workspace }}
