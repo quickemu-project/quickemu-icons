@@ -22,6 +22,13 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           ./build.sh
+      - name: Docs folder
+        run: |
+          cd ${{ github.workspace }}
+          mkdir docs
+          cp -r build/* docs
+          git add docs
+          git commit -m "Docs"
       - name: Publish to pages
         uses: ad-m/github-push-action@master
         with:
