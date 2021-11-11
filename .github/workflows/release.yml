@@ -11,10 +11,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: echo "Starting build"
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+			- uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - name: Install dependences
         run: |
-          sudo apt update
-          sudo apt install nodejs
+          npm install -g svgo svgexport
           ${{ github.workspace }}build.sh
