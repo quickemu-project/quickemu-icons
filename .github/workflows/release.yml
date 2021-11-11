@@ -22,3 +22,9 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           ./build.sh
+      - name: Publish to pages
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          directory: build
