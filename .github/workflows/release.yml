@@ -28,6 +28,8 @@ jobs:
         with:
           upload_url: ${{ env.UPLOAD_URL }}
           asset_path: ./build/quickemu-icons.tar.gz
+          asset_name: quickemu-icons.tar.gz
+          asset_content_type: application/gzip
       - name: Docs folder
         run: |
           cd ${{ github.workspace }}
