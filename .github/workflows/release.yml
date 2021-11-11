@@ -1,0 +1,37 @@
+name: Release to Pages
+on:
+  release:
+    types:
+      - published
+jobs:
+  Build:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "Starting build"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependences
+        run: |
+          npm install -g svgo svgexport
+      - name: Build
+        run: |
+          cd ${{ github.workspace }}
+          ./build.sh
+      - name: Docs folder
+        run: |
+          cd ${{ github.workspace }}
+          mkdir docs
+          cp -r build/* docs
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add docs
+          git commit -m "Docs"
+      - name: Publish to pages
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          directory: build
+          force: true
