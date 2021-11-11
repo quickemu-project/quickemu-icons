@@ -1,0 +1,14 @@
+name: Release to Pages
+on: [push]
+jobs:
+	Build:
+		runs-on: ubuntu-20.04
+		steps:
+			- run: echo "Starting build"
+			- name: Checkout repository
+				uses: actions/checkout@v2
+			- name: Install dependences
+				run: |
+				  sudo apt update
+					sudo apt install nodejs
+					${{ github.workspace }}build.sh
