@@ -37,6 +37,12 @@ jobs:
           cd ${{ github.workspace }}
           mkdir docs
           cp -r build/* docs
+      - name: Generate index
+        run: |
+          cd ${{ github.workspace }}/docs
+          tree -H '.' -L 3 --noreport --charset utf-8 -o index.html
+      - name: Commit docs
+        run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add docs
