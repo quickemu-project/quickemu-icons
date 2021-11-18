@@ -47,10 +47,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add docs
           git commit -m "Docs"
-      - name: Generate index
-        run: |
-          cd docs
-          tree -H '.' -L 3 --noreport --charset utf-8 -o index.html
+
       - name: Publish to pages
         uses: ad-m/github-push-action@master
         with:
@@ -58,3 +55,10 @@ jobs:
           branch: gh-pages
           directory: build
           force: true
+      - name: Qickgui
+        run: |
+          mkdir ${{ github.workspace }}/quickgui
+          cd quickgui
+          cp ../docs/png/*/* .
+          cp ../docs/svg/*/* .
+          ls
