@@ -4,7 +4,7 @@ on:
     types:
       - published
 jobs:
-  Build:
+  Build and release:
     runs-on: ubuntu-20.04
     steps:
       - run: echo "Starting build"
@@ -47,7 +47,6 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add docs
           git commit -m "Docs"
-
       - name: Publish to pages
         uses: ad-m/github-push-action@master
         with:
@@ -55,10 +54,22 @@ jobs:
           branch: gh-pages
           directory: build
           force: true
-      - name: Qickgui
+      - name: Copy built files to root
         run: |
-          mkdir ${{ github.workspace }}/quickgui
-          cd quickgui
-          cp ../docs/png/*/* .
-          cp ../docs/svg/*/* .
-          ls
+          cp ${{ github.workspace }}/docs/png/*/* ${{ github.workspace }}
+          cp ${{ github.workspace }}/docs/svg/*/* ${{ github.workspace }}
+      - name: Delete docs
+        run: rm -r ${{ github.workspace }}/docs
+      - name: Add and commit
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Quickgui"
+      - name: Publish to quickgui
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: quickgui
+          directory: .
+          force: true
