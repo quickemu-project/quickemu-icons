@@ -7,9 +7,10 @@
 Quickemu VM icons for various operating systems for use in desktop files etc.
 
 Visit the [Releases page](https://github.com/Lukewh/quickemu-icons/releases) to download optimized versions.
+You can also view the available icons [here](https://quickemu-project.github.io/quickemu-icons/).
 
-[Quickemu](https://github.com/wimpysworld/quickemu) is a project by the awesome Martin Wimpress.
-Check out his [Twitch channel](https://twitch.tv/wimpysworld) for coding streams and other fun stuff!
+[Quickemu](https://github.com/quickemu-project/quickemu) is a project by [Martin Wimpress](https://github.com/wimpysworld).
+[Quickgui](https://github.com/quickgui/quickgui) is a project by [Mark Johnson](https://github.com/marxjohnson) and [Yannick Mauray](https://github.com/ymauray).
 
 <hr />
 
