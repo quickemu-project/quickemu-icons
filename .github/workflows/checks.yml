@@ -17,4 +17,3 @@ jobs:
       - name: Run shellcheck
         run: |
           find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" \) | xargs shellcheck
-          
