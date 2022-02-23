@@ -22,7 +22,6 @@ You can also view the available icons [here](https://quickemu-project.github.io/
 			<th>OS</th>
 			<th>PNG</th>
 			<th>SVG</th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
