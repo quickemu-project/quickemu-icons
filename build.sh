@@ -27,6 +27,10 @@ for distro_icon in src/distro-icons/*.svg; do
 	SVG_DIR="$BUILD_DIR/svg/$DISTRO_NAME"
 	mkdir -p "$PNG_DIR"
 	mkdir -p "$SVG_DIR"
+    
+	# Copy the original icon and generate the png
+	cp "$distro_icon" "$SVG_DIR/"
+	${SVGEXPORT} "$SVG_DIR/$DISTRO_NAME.svg" "$PNG_DIR/$DISTRO_NAME.png" 512
 
 	for quickemu_icon in src/quickemu-icons/*.svg; do
 		FILE_NAME="$(basename "$quickemu_icon")"
