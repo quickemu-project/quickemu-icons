@@ -20,6 +20,11 @@ BUILD_DIR="$PROJECT_ROOT/build"
 # Start from a clean slate
 rm -rf "$BUILD_DIR"
 
+function debug {
+		echo "${1}:"
+		echo "    ${2}"
+}
+
 for distro_icon in src/distro-icons/*.svg; do
 	# Create directories for every distro (e.g. 'build/png/fedora' and 'build/svg/fedora')
 	DISTRO_NAME=$(basename -a -s .svg "$distro_icon")
@@ -28,8 +33,18 @@ for distro_icon in src/distro-icons/*.svg; do
 	mkdir -p "$PNG_DIR"
 	mkdir -p "$SVG_DIR"
 
+	debug "Disto name" "${DISTRO_NAME}"
+	debug "png dir" "${PNG_DIR}"
+	debug "svg dir" "${SVG_DIR}"
+
+	# Create the no-overlay version of the OS icon
+	${SVGO} -o "${SVG_DIR}/icon.svg" "${distro_icon}"
+	${SVGEXPORT} "${SVG_DIR}/icon.svg" "${PNG_DIR}/icon.png" 512
+	exit 0
+
 	for quickemu_icon in src/quickemu-icons/*.svg; do
 		FILE_NAME="$(basename "$quickemu_icon")"
+		debug "File name" "${FILE_NAME}"
 		# Combine the distro icon with every quickemu icon variant that has a background
 		# and save the output under 'build/svg/fedora/DISTRO-QEMU_VARIANT.svg'
 		if [[ ! "$FILE_NAME" =~ "nobg-overlay" && "$FILE_NAME" =~ "overlay" ]]; then
@@ -43,6 +58,7 @@ for distro_icon in src/distro-icons/*.svg; do
 			PNG_OUTPUT_PATH="$PNG_DIR/$PNG_OUTPUT_FILENAME"
 			${SVGEXPORT} "$SVG_OUTPUT_PATH" "$PNG_OUTPUT_PATH" 512
 		fi
+		exit 0
 	done
 done
 
